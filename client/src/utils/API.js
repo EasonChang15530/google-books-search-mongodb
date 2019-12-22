@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// GET https://www.googleapis.com/books/v1/volumes?q=search+terms&key=yourAPIKey
-// APIKey=AIzaSyCzILzMGHZzUEErZgl7ZBjUxEkgknE5D_o
-
 export default {
   // Gets all books
   getBooks: function() {
@@ -19,5 +16,10 @@ export default {
   // Saves a book to the database
   saveBook: function(bookData) {
     return axios.post("/api/books", bookData);
+  },
+  
+  // Search a book from Google Book Api
+  searchBook: function(searchBook) {
+    return axios.get("/api/books/search/" + searchBook);
   }
 };
