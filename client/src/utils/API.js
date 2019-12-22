@@ -1,5 +1,8 @@
 import axios from "axios";
 
+// GET https://www.googleapis.com/books/v1/volumes?q=search+terms&key=yourAPIKey
+// APIKey=AIzaSyCzILzMGHZzUEErZgl7ZBjUxEkgknE5D_o
+
 export default {
   // Gets all books
   getBooks: function() {
