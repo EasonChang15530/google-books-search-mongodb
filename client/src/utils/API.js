@@ -1,4 +1,6 @@
 import axios from "axios";
+const googlebooksURL = "https://www.googleapis.com/books/v1/volumes?q=";
+// const APIKEY = "&apikey=trilogy";
 
 export default {
   // Gets all books
@@ -19,7 +21,8 @@ export default {
   },
   
   // Search a book from Google Book Api
-  searchBook: function(searchBook) {
-    return axios.get("/api/books/search/" + searchBook);
-  }
+  search: function(search) {
+    return axios.get(googlebooksURL + search);
+  },
+
 };
