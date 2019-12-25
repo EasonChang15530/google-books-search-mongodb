@@ -20,9 +20,12 @@ export default {
     return axios.post("/api/books", bookData);
   },
   
+  getBaseBreedsList: function() {
+    return axios.get("https://dog.ceo/api/breeds/list");
+  },
   // Search a book from Google Book Api
-  search: function(search) {
-    return axios.get(googlebooksURL + search);
+  searchBook: function(book) {
+    return axios.get(googlebooksURL + book);
   },
 
 };

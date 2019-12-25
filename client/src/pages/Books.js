@@ -1,103 +1,99 @@
 import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
-import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
-import Card from "../components/Card";
-import SearchForm from "../components/SearchForm";
-import BookDetail from "../components/BookDetail";
 import API from "../utils/API";
+import Container from "../components/Container";
+import SearchForm from "../components/SearchForm";
+import SearchResults from "../components/SearchResults";
+import Alert from "../components/Alert";
 
 class Books extends Component {
   state = {
     // How to retrieve data from google api ?
+    search: "",
     title: "",
-    authors: [],
-    publishedDate: "",
-    description: "",
-    image: "",
+    results: [],
+    error: "",
   };
 
   componentDidMount() {
-    this.searchBooks();
-    this.loadBooks();
-  };
-
-  searchBooks = search => {
-    API.search(search)
-      .then(res => this.setState({ result: res.data }))
+    API.getBaseBreedsList()
+      .then(res => this.setState({ breeds: res.data.message }))
       .catch(err => console.log(err));
   };
 
-  loadBooks = () => {
-    API.getBooks()
-      .then(res =>
-        this.setState({ 
-          title: res.data.items[0].volumeInfo.title, 
-          authors: res.data.items[0].volumeInfo.authors, 
-          publishedDate: res.data.items[0].volumeInfo.publishedDate, 
-          description: res.data.items[0].volumeInfo.description, 
-          image: res.data.items[0].volumeInfo.imageLinks.thumbnail, 
-        })
-      )
-      .catch(err => console.log(err));
-  };
-
-  deleteBook = id => {
-    API.deleteBook(id)
-      .then(res => this.loadBooks())
-      .catch(err => console.log(err));
-  };
+  // searchBooks = search => {
+  //   API.search(search)
+  //     .then(res => this.setState({ 
+  //       title: res.data.items[0].volumeInfo.title, 
+  //       authors: res.data.items[0].volumeInfo.authors, 
+  //       publishedDate: res.data.items[0].volumeInfo.publishedDate, 
+  //       description: res.data.items[0].volumeInfo.description, 
+  //       image: res.data.items[0].volumeInfo.imageLinks.thumbnail,  
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
 
   handleInputChange = event => {
-    // const value = event.target.value;
-    // const name = event.target.name;
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ search: event.target.value });
   };
+  // handleInputChange = event => {
+  //   // const value = event.target.value;
+  //   // const search = event.target.search;
+  //   const { search, value } = event.target;
+  //   this.setState({
+  //     [search]: value
+  //   });
+  // };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    this.searchBooks(this.state.search);
+    API.searchBook(this.state.search)
+      .then(res => {
+        if (res.data.status === "error") {
+          throw new Error(res.data.message);
+        }
+        this.setState({ 
+          results: res.data.items[0].volumeInfo.imageLinks.thumbnail,
+          error: "" });
+      })
+      .catch(err => this.setState({ error: err.message }));
   };
+
+  // loadBooks = () => {
+  //   API.getBooks()
+  //     .then(res =>
+  //       this.setState({ 
+          
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
+
+  // deleteBook = id => {
+  //   API.deleteBook(id)
+  //     .then(res => this.loadBooks())
+  //     .catch(err => console.log(err));
+  // };
 
   render() {
     return (
-      <Container>
-        <Row>
-          <Col size="md-8">
-            <Card
-              heading={this.state.title || "Search for a Book to Begin"}
-            >
-              {/* Question mark "?" meaning here?  */}
-              {this.state.title ? (
-                <BookDetail
-                  title={this.state.title}
-                  src={this.state.thumbnail}
-                  authors={this.state.authors}
-                  publishedDate={this.state.publishedDate}
-                  description={this.state.result.description}
-                />
-              ) : (
-                  <h3>No Results to Display</h3>
-                )}
-            </Card>
-          </Col>
-          <Col size="md-4">
-            <Card heading="Search">
-              <SearchForm
-                value={this.state.search}
-                handleInputChange={this.handleInputChange}
-                handleFormSubmit={this.handleFormSubmit}
-              />
-            </Card>
-          </Col>
-        </Row>
-      </Container>
+      <div>
+        <Container style={{ minHeight: "80%" }}>
+          <h1 className="text-center">Search Book!</h1>
+          <Alert
+            type="danger"
+            style={{ opacity: this.state.error ? 1 : 0, marginBottom: 10 }}
+          >
+            {this.state.error}
+          </Alert>
+          <SearchForm
+            handleFormSubmit={this.handleFormSubmit}
+            handleInputChange={this.handleInputChange}
+            books={this.state.books}
+          />
+          <SearchResults results={this.state.results} />
+        </Container>
+      </div>
     );
   }
 }
