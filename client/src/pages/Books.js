@@ -7,58 +7,58 @@ import SearchResults from "../components/SearchResults";
 import API from "../utils/API";
 
 class Books extends Component {
-//   state = {
-//     // How to retrieve data from google api ?
-//     search: "",
-//     title: "",
-//     results: [],
-//     error: "",
-//   };
+  state = {
+    // How to retrieve data from google api ?
+    search: "",
+    books: [],
+    error: "",
+  };
 
-//   componentDidMount() {
-//     API.getBaseBreedsList()
-//       .then(res => this.setState({ breeds: res.data.message }))
-//       .catch(err => console.log(err));
-//   };
+  componentDidMount() {
+    API.getBaseBreedsList()
+      .then(res => this.setState({ breeds: res.data.message }))
+      .catch(err => console.log(err));
+  };
 
-//   // searchBooks = search => {
-//   //   API.search(search)
-//   //     .then(res => this.setState({ 
-//   //       title: res.data.items[0].volumeInfo.title, 
-//   //       authors: res.data.items[0].volumeInfo.authors, 
-//   //       publishedDate: res.data.items[0].volumeInfo.publishedDate, 
-//   //       description: res.data.items[0].volumeInfo.description, 
-//   //       image: res.data.items[0].volumeInfo.imageLinks.thumbnail,  
-//   //       })
-//   //     )
-//   //     .catch(err => console.log(err));
-//   // };
+  searchBooks = search => {
+    API.searchBooks(this.state.search)
+      .then(res => this.setState({ 
+        // title: res.data.items[0].volumeInfo.title, 
+        // authors: res.data.items[0].volumeInfo.authors, 
+        // publishedDate: res.data.items[0].volumeInfo.publishedDate, 
+        // description: res.data.items[0].volumeInfo.description, 
+        // image: res.data.items[0].volumeInfo.imageLinks.thumbnail,  
+        books: res.data,
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
-//   handleInputChange = event => {
-//     this.setState({ search: event.target.value });
-//   };
-//   // handleInputChange = event => {
-//   //   // const value = event.target.value;
-//   //   // const search = event.target.search;
-//   //   const { search, value } = event.target;
-//   //   this.setState({
-//   //     [search]: value
-//   //   });
-//   // };
+  // handleInputChange = event => {
+  //   this.setState({ search: event.target.value });
+  // };
+  // // handleInputChange = event => {
+  // //   // const value = event.target.value;
+  // //   // const search = event.target.search;
+  // //   const { search, value } = event.target;
+  // //   this.setState({
+  // //     [search]: value
+  // //   });
+  // // };
 
-//   handleFormSubmit = event => {
-//     event.preventDefault();
-//     API.searchBook(this.state.search)
-//       .then(res => {
-//         if (res.data.status === "error") {
-//           throw new Error(res.data.message);
-//         }
-//         this.setState({ 
-//           results: res.data.items[0].volumeInfo.imageLinks.thumbnail,
-//           error: "" });
-//       })
-//       .catch(err => this.setState({ error: err.message }));
-//   };
+  // handleFormSubmit = event => {
+  //   event.preventDefault();
+  //   API.searchBook(this.state.search)
+  //     .then(res => {
+  //       if (res.data.status === "error") {
+  //         throw new Error(res.data.message);
+  //       }
+  //       this.setState({ 
+  //         results: res.data.items[0].volumeInfo.imageLinks.thumbnail,
+  //         error: "" });
+  //     })
+  //     .catch(err => this.setState({ error: err.message }));
+  // };
 
 //   // loadBooks = () => {
 //   //   API.getBooks()
@@ -86,9 +86,9 @@ class Books extends Component {
           <h1 className="text-center">Search Book!</h1>
           </Jumbotron>
           <SearchForm
-            // handleFormSubmit={this.handleFormSubmit}
-            // handleInputChange={this.handleInputChange}
-            // books={this.state.books}
+            handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
+            books={this.state.books}
           />
           <SearchResults 
           // results={this.state.results} 

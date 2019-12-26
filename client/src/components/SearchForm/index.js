@@ -17,11 +17,12 @@ function SearchForm(props) {
           placeholder="Type in a book to begin"
           id="book"
         />
-        <datalist id="books">
+        {/* How to set the autofill suggestions? */}
+        {/* <datalist id="books">
           {props.books.map(book => (
             <option value={book} key={book} />
           ))}
-        </datalist>
+        </datalist> */}
         <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
           Search
         </button>

@@ -1,0 +1,11 @@
+.jumbotron{
+  height: 30vh;
+  clear: "both";
+  padding-top: 120;
+  text-align: "center";
+  background-image: url("./background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover; 
+  font-family: 'Courgette', cursive;
+  color: seashell;
+}
