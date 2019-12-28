@@ -1,6 +1,7 @@
 import React from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import Navbar from "../components/Navbar";
 
 function NoMatch() {
   return (
@@ -8,6 +9,7 @@ function NoMatch() {
       <Row>
         <Col size="md-12">
           <Jumbotron>
+          <Navbar />
             <h1>404 Page Not Found</h1>
             <h1>
               <span role="img" aria-label="Face With Rolling Eyes Emoji">

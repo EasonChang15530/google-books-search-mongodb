@@ -1,49 +1,51 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import Navbar from "../components/Navbar";
+import SearchResults from "../components/SearchResults";
 import API from "../utils/API";
 
 class Saved extends Component {
   state = {
-    book: {}
+    search: "",
+    books: [],
+    error: "",
   };
+
   // When this component mounts, grab the book with the _id of this.props.match.params.id
   // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-  componentDidMount() {
-    API.getBook(this.props.match.params.id)
-      .then(res => this.setState({ book: res.data }))
-      .catch(err => console.log(err));
-  }
+  // componentDidMount() {
+  //   API.getBook(this.props.match.params.id)
+  //     .then(res => this.setState({ book: res.data }))
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     return (
-      <Container fluid>
+      <div>
+        <Container fluid>
         <Row>
           <Col size="md-12">
-            <Jumbotron>
-              <h1>
-                {this.state.book.title} by {this.state.book.author}
-              </h1>
-            </Jumbotron>
+          <Jumbotron>
+            <h1 className="text-center">Saved book</h1>
+          </Jumbotron>
+          <Navbar />
+          {this.state.books.map(obj=>{
+            return <SearchResults 
+            title={obj.volumeInfo.title}
+            authors={obj.volumeInfo.authors}
+            image={obj.volumeInfo.imageLinks.thumbnail}
+            publishedDate={obj.volumeInfo.publishedDate}
+            link={obj.volumeInfo.previewLink}
+            description={obj.volumeInfo.description}
+            />
+            
+          })}
+          
           </Col>
         </Row>
-        <Row>
-          <Col size="md-10 md-offset-1">
-            <article>
-              <h1>Synopsis</h1>
-              <p>
-                {this.state.book.synopsis}
-              </p>
-            </article>
-          </Col>
-        </Row>
-        <Row>
-          <Col size="md-2">
-            <Link to="/">← Back to Authors</Link>
-          </Col>
-        </Row>
-      </Container>
+        </Container>
+      </div>
     );
   }
 }

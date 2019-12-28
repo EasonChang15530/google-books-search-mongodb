@@ -9,7 +9,8 @@ const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
   title: { type: String, required: true },
-  author: { type: Array, required: true },
+  authors: { type: Array, required: true },
+  publishedDate: String,
   description: String,
   image: String,
   link: String,

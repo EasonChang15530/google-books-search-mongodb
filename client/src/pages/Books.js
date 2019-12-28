@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Col, Row, Container } from "../components/Grid";
 import Jumbotron from "../components/Jumbotron";
+import Navbar from "../components/Navbar";
 import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 
@@ -71,6 +72,7 @@ class Books extends Component {
           <Jumbotron>
             <h1 className="text-center">Search Book!</h1>
           </Jumbotron>
+          <Navbar />
           <SearchForm
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
