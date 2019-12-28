@@ -4,7 +4,8 @@ const googlebooksURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export default {
 
-  // Searches a book from Google Book Api
+  // Retrieve data from google api
+  // Searches books from Google Book api
   searchBook: function(search) {
     return axios.get(googlebooksURL + search);
   },
@@ -29,9 +30,10 @@ export default {
     return axios.delete("/api/books/" + id);
   },
 
-  
-  getBaseBreedsList: function() {
-    return axios.get("https://dog.ceo/api/breeds/list");
+  // Set the auto-fill suggestions
+  getAutoFillList: function() {
+    // This function is not implemented for the moment, because the auto-fill books name list API cannot be found
+    return axios.get("https://www.googleapis.com/books/v1/list");
   },
 
 };

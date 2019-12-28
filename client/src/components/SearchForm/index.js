@@ -17,7 +17,7 @@ function SearchForm(props) {
           placeholder="Type in a book to begin"
           id="book"
         />
-        {/* How to set the autofill suggestions? */}
+        {/* Set the autofill suggestions */}
         {/* <datalist id="books">
           {props.books.map(book => (
             <option value={book} key={book} />

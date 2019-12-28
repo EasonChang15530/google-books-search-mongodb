@@ -1,3 +1,8 @@
 ul.search-results img {
-  margin: 0 auto;
+  margin: auto;
+}
+
+.title-font{
+  font-family: 'Courgette', cursive;
+  color: black;
 }

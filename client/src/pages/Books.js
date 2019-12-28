@@ -8,73 +8,59 @@ import API from "../utils/API";
 
 class Books extends Component {
   state = {
-    // How to retrieve data from google api ?
     search: "",
     books: [],
     error: "",
   };
 
+  // When the component mounts, get the auto-fill books name list suggestions 
   componentDidMount() {
-    API.getBaseBreedsList()
-      .then(res => this.setState({ breeds: res.data.message }))
-      .catch(err => console.log(err));
+    
   };
 
-  searchBooks = search => {
-    API.searchBooks(this.state.search)
+  // searchOneBook = () => {
+  //   API.searchBooks(this.state.search)
+  //     .then(res => this.setState({ 
+  //       // title: res.data.items[0].volumeInfo.title, 
+  //       // authors: res.data.items[0].volumeInfo.authors, 
+  //       // publishedDate: res.data.items[0].volumeInfo.publishedDate, 
+  //       // description: res.data.items[0].volumeInfo.description, 
+  //       // image: res.data.items[0].volumeInfo.imageLinks.thumbnail, 
+  //       // link: res.data.items[0].volumeInfo.previewLink,
+  //       books: res.data.items,
+  //       })
+  //     )
+  //     .catch(err => console.log(err));
+  // };
+
+  handleInputChange = event => {
+    this.setState({ search: event.target.value });
+  };
+
+  // handleInputChange = event => {
+  //   // const value = event.target.value;
+  //   // const search = event.target.search;
+  //   const { search, value } = event.target;
+  //   this.setState({
+  //     [search]: value
+  //   });
+  // };
+
+  handleFormSubmit = event => {
+    event.preventDefault();
+    API.searchBook(this.state.search)
       .then(res => this.setState({ 
         // title: res.data.items[0].volumeInfo.title, 
         // authors: res.data.items[0].volumeInfo.authors, 
         // publishedDate: res.data.items[0].volumeInfo.publishedDate, 
         // description: res.data.items[0].volumeInfo.description, 
         // image: res.data.items[0].volumeInfo.imageLinks.thumbnail,  
-        books: res.data,
+        // link: res.data.items[0].volumeInfo.previewLink,
+        books: res.data.items,
         })
       )
       .catch(err => console.log(err));
   };
-
-  // handleInputChange = event => {
-  //   this.setState({ search: event.target.value });
-  // };
-  // // handleInputChange = event => {
-  // //   // const value = event.target.value;
-  // //   // const search = event.target.search;
-  // //   const { search, value } = event.target;
-  // //   this.setState({
-  // //     [search]: value
-  // //   });
-  // // };
-
-  // handleFormSubmit = event => {
-  //   event.preventDefault();
-  //   API.searchBook(this.state.search)
-  //     .then(res => {
-  //       if (res.data.status === "error") {
-  //         throw new Error(res.data.message);
-  //       }
-  //       this.setState({ 
-  //         results: res.data.items[0].volumeInfo.imageLinks.thumbnail,
-  //         error: "" });
-  //     })
-  //     .catch(err => this.setState({ error: err.message }));
-  // };
-
-//   // loadBooks = () => {
-//   //   API.getBooks()
-//   //     .then(res =>
-//   //       this.setState({ 
-          
-//   //       })
-//   //     )
-//   //     .catch(err => console.log(err));
-//   // };
-
-//   // deleteBook = id => {
-//   //   API.deleteBook(id)
-//   //     .then(res => this.loadBooks())
-//   //     .catch(err => console.log(err));
-//   // };
 
   render() {
     return (
@@ -83,16 +69,24 @@ class Books extends Component {
         <Row>
           <Col size="md-12">
           <Jumbotron>
-          <h1 className="text-center">Search Book!</h1>
+            <h1 className="text-center">Search Book!</h1>
           </Jumbotron>
           <SearchForm
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
-            books={this.state.books}
           />
-          <SearchResults 
-          // results={this.state.results} 
-          />
+          {this.state.books.map(obj=>{
+            return <SearchResults 
+            title={obj.volumeInfo.title}
+            authors={obj.volumeInfo.authors}
+            image={obj.volumeInfo.imageLinks.thumbnail}
+            publishedDate={obj.volumeInfo.publishedDate}
+            link={obj.volumeInfo.previewLink}
+            description={obj.volumeInfo.description}
+            />
+            
+          })}
+          
           </Col>
         </Row>
         </Container>
