@@ -5,6 +5,7 @@ import { Row, Col } from "../Grid";
 import "./style.css";
 
 function SearchResults(props) {
+
   return (
     <ListItem>
       <Row className="flex-wrap-reverse">
@@ -15,12 +16,12 @@ function SearchResults(props) {
         </Col>
         <Col size="md-4">
           <div className="btn-container">
-            <a className="btn btn-secondary" href={props.link}>
+            <a className="btn btn-secondary" href={props.link} target="_blank">
               View
             </a>
-            <a className="btn btn-secondary">
-              Save
-            </a>
+            {props.cansave  ? 
+            (<button className="btn btn-secondary" id={props.index} onClick={props.saveBook} >Save</button>) : 
+            (<button className="btn btn-secondary" id={props.index} onClick={props.deleteBook} >Delete</button>)}
           </div>
         </Col>
       </Row>

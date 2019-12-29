@@ -12,13 +12,11 @@ class Saved extends Component {
     error: "",
   };
 
-  // When this component mounts, grab the book with the _id of this.props.match.params.id
-  // e.g. localhost:3000/books/599dcb67f0f16317844583fc
-  // componentDidMount() {
-  //   API.getBook(this.props.match.params.id)
-  //     .then(res => this.setState({ book: res.data }))
-  //     .catch(err => console.log(err));
-  // }
+  componentDidMount() {
+    API.getSavedBooks()
+      .then(res => this.setState({ books: res.data }))
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -32,12 +30,13 @@ class Saved extends Component {
           <Navbar />
           {this.state.books.map(obj=>{
             return <SearchResults 
-            title={obj.volumeInfo.title}
-            authors={obj.volumeInfo.authors}
-            image={obj.volumeInfo.imageLinks.thumbnail}
-            publishedDate={obj.volumeInfo.publishedDate}
-            link={obj.volumeInfo.previewLink}
-            description={obj.volumeInfo.description}
+            cansave={false}
+            title={obj.title}
+            authors={obj.authors}
+            image={obj.image}
+            publishedDate={obj.publishedDate}
+            link={obj.link}
+            description={obj.description}
             />
             
           })}

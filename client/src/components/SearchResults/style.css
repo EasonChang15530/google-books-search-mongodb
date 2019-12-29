@@ -6,3 +6,8 @@ ul.search-results img {
   font-family: 'Courgette', cursive;
   color: black;
 }
+
+/* .btn-container > .btn{ */
+.btn-container .btn{
+  margin: 4px;
+}

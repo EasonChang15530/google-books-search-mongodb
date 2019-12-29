@@ -63,6 +63,23 @@ class Books extends Component {
       .catch(err => console.log(err));
   };
 
+  saveBook = event => {
+    event.preventDefault();
+    console.log(event.target.id)
+    var index=event.target.id;
+    var book=this.state.books[index];
+    var bookInfo = {
+      title: book.volumeInfo.title, 
+      authors: book.volumeInfo.authors, 
+      publishedDate: book.volumeInfo.publishedDate, 
+      description: book.volumeInfo.description, 
+      image: book.volumeInfo.imageLinks.thumbnail,  
+      link: book.volumeInfo.previewLink,
+    };
+    console.log(book)
+    API.saveBook(bookInfo)
+  }
+
   render() {
     return (
       <div>
@@ -77,14 +94,17 @@ class Books extends Component {
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
           />
-          {this.state.books.map(obj=>{
+          {this.state.books.map((obj,index)=>{
             return <SearchResults 
+            cansave={true}
             title={obj.volumeInfo.title}
             authors={obj.volumeInfo.authors}
             image={obj.volumeInfo.imageLinks.thumbnail}
             publishedDate={obj.volumeInfo.publishedDate}
             link={obj.volumeInfo.previewLink}
             description={obj.volumeInfo.description}
+            index={index}
+            saveBook={this.saveBook}
             />
             
           })}
