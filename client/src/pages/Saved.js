@@ -50,6 +50,7 @@ class Saved extends Component {
                   publishedDate={obj.publishedDate}
                   link={obj.link}
                   description={obj.description}
+                  
                   id={obj._id}
                   index={index}
                   handleDeleteBook={this.handleDeleteBook}

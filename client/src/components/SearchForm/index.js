@@ -9,7 +9,6 @@ function SearchForm(props) {
         <label htmlFor="book">Book Name:</label>
         <input
           type="text"
-          // Why is props.search here?
           value={props.input}
           onChange={props.handleInputChange}
           className="form-control"

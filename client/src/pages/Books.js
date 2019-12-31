@@ -49,7 +49,6 @@ class Books extends Component {
 
   handleSaveBook = event => {
     event.preventDefault();
-    // Question? But we didn't set id here?
     console.log(event.target)
     const index = event.target.getAttribute("data-index")
     const book = this.state.books[index];
@@ -90,9 +89,8 @@ class Books extends Component {
                   publishedDate={obj.volumeInfo.publishedDate}
                   link={obj.volumeInfo.previewLink}
                   description={obj.volumeInfo.description}
-                  // Question? Why there is no this for index?
+
                   index={index}
-                  // Question?
                   handleSaveBook={this.handleSaveBook}
                 />
 
