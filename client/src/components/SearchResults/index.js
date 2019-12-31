@@ -19,9 +19,9 @@ function SearchResults(props) {
             <a className="btn btn-secondary" href={props.link} target="_blank">
               View
             </a>
-            {props.canSave  ? 
-            (<button className="btn btn-secondary" data-index={props.booksIndex} onClick={props.handleSaveBook} >Save</button>) : 
-            (<button className="btn btn-secondary" id={props.idInDatabase} data-index={props.savedIndex} onClick={props.handleDeleteBook} >Delete</button>)}
+            {props.canSave ?
+              (<button className="btn btn-secondary" data-index={props.booksIndex} onClick={props.handleSaveBook}> Save </button>) :
+              (<button className="btn btn-secondary" id={props.idInDatabase} data-index={props.savedIndex} onClick={props.handleDeleteBook}> Delete </button>)}
           </div>
         </Col>
       </Row>

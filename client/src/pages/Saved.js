@@ -17,28 +17,29 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
-  handleDeleteBook = event => {
-    event.preventDefault();
-    const index = event.target.getAttribute("data-index")
-    console.log(index)
-
-    // The splice() method adds/removes items to/from an array, and returns the removed item(s).
-    // Note: This method changes the original array.
-    this.state.books.splice(index, 1)
-
-    this.setState({ books: this.state.books });
-
-  }
-
-  // Offer a second method to delete books, using utils API.js
+  // This method does not delete the corresponding book information from mongo database
   // handleDeleteBook = event => {
   //   event.preventDefault();
-  //   const id = event.target.id;
-  //   console.log(id)
-  //   API.deleteBook(id)
-  //     .then(res => this.componentDidMount())
-  //     .catch(err => console.log(err));
+  //   const index = event.target.getAttribute("data-index")
+  //   console.log(index)
+
+  //   // The splice() method adds/removes items to/from an array, and returns the removed item(s).
+  //   // Note: This method changes the original array.
+  //   this.state.books.splice(index, 1)
+
+  //   this.setState({ books: this.state.books });
+
   // }
+
+  // Offer a second method to delete books, using utils API.js
+  handleDeleteBook = event => {
+    event.preventDefault();
+    const id = event.target.id;
+    console.log(id)
+    API.deleteBook(id)
+      .then(res => this.componentDidMount())
+      .catch(err => console.log(err));
+  }
 
   render() {
     return (
