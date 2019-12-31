@@ -7,7 +7,6 @@ import API from "../utils/API";
 
 class Saved extends Component {
   state = {
-    search: "",
     books: [],
     error: "",
   };
@@ -20,16 +19,26 @@ class Saved extends Component {
 
   handleDeleteBook = event => {
     event.preventDefault();
-
-    const id = event.target.id;
     const index = event.target.getAttribute("data-index")
     console.log(index)
+
+    // The splice() method adds/removes items to/from an array, and returns the removed item(s).
+    // Note: This method changes the original array.
     this.state.books.splice(index, 1)
 
     this.setState({ books: this.state.books });
 
-    API.deleteBook(id)
   }
+
+  // Offer a second method to delete books, using utils API.js
+  // handleDeleteBook = event => {
+  //   event.preventDefault();
+  //   const id = event.target.id;
+  //   console.log(id)
+  //   API.deleteBook(id)
+  //     .then(res => this.componentDidMount())
+  //     .catch(err => console.log(err));
+  // }
 
   render() {
     return (
@@ -43,19 +52,21 @@ class Saved extends Component {
               <Navbar />
               {this.state.books.map((obj, index) => {
                 return <SearchResults
-                  cansave={false}
+                  canSave={false}
                   title={obj.title}
                   authors={obj.authors}
                   image={obj.image}
                   publishedDate={obj.publishedDate}
                   link={obj.link}
                   description={obj.description}
-                  
-                  id={obj._id}
-                  index={index}
+
+                  idInDatabase={obj._id}
+                  savedIndex={index}
                   handleDeleteBook={this.handleDeleteBook}
                 />
+
               })}
+
             </Col>
           </Row>
         </Container>

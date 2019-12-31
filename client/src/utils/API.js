@@ -21,6 +21,7 @@ export default {
   },
 
   // Searches the saved book with the given id
+  // This function is not implemented for the moment
   searchSavedBook: function(id) {
     return axios.get("/api/books/" + id);
   },

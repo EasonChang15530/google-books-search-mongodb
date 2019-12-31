@@ -50,8 +50,10 @@ class Books extends Component {
   handleSaveBook = event => {
     event.preventDefault();
     console.log(event.target)
+
     const index = event.target.getAttribute("data-index")
     const book = this.state.books[index];
+    console.log(book)
 
     const bookInfo = {
       title: book.volumeInfo.title,
@@ -61,7 +63,7 @@ class Books extends Component {
       image: book.volumeInfo.imageLinks.thumbnail,
       link: book.volumeInfo.previewLink,
     };
-    console.log(book)
+    console.log(bookInfo)
     API.saveBook(bookInfo)
   }
 
@@ -79,10 +81,11 @@ class Books extends Component {
                 handleInputChange={this.handleInputChange}
                 handleInputSubmit={this.handleInputSubmit}
               />
-              {/* Question? map and return */}
+              {/* The map() method creates a new array with the results of calling a function for every array element. */}
+              {console.log(this.state.books)}
               {this.state.books.map((obj, index) => {
                 return <SearchResults
-                  cansave={true}
+                  canSave={true}
                   title={obj.volumeInfo.title}
                   authors={obj.volumeInfo.authors}
                   image={obj.volumeInfo.imageLinks.thumbnail}
@@ -90,7 +93,7 @@ class Books extends Component {
                   link={obj.volumeInfo.previewLink}
                   description={obj.volumeInfo.description}
 
-                  index={index}
+                  booksIndex={index}
                   handleSaveBook={this.handleSaveBook}
                 />
 

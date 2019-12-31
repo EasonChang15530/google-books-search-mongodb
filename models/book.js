@@ -9,8 +9,8 @@ const Schema = mongoose.Schema;
 
 const bookSchema = new Schema({
   title: { type: String, required: true },
-  // authors type is Array, why {}?
   authors: { type: Array, required: true },
+  // The type of publishedDate here is String, not data, because it is a string obtained directly from the Google Books API
   publishedDate: String,
   description: String,
   image: String,
