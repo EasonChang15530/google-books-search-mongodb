@@ -20,8 +20,8 @@ function SearchResults(props) {
               View
             </a>
             {props.cansave  ? 
-            (<button className="btn btn-secondary" id={props.index} onClick={props.saveBook} >Save</button>) : 
-            (<button className="btn btn-secondary" id={props.index} onClick={props.deleteBook} >Delete</button>)}
+            (<button className="btn btn-secondary" data-index={props.index} onClick={props.handleSaveBook} >Save</button>) : 
+            (<button className="btn btn-secondary" id={props.id} data-index={props.index} onClick={props.handleDeleteBook} >Delete</button>)}
           </div>
         </Col>
       </Row>

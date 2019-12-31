@@ -4,8 +4,8 @@ const googlebooksURL = "https://www.googleapis.com/books/v1/volumes?q=";
 
 export default {
 
-  // Retrieve data from google api
-  // Searches books from Google Book api
+  // Retrieve data from Google Book Api
+  // Searches books from Google Book Api
   searchBook: function(search) {
     return axios.get(googlebooksURL + search);
   },

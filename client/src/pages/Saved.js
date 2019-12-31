@@ -18,31 +18,45 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
+  handleDeleteBook = event => {
+    event.preventDefault();
+
+    const id = event.target.id;
+    const index = event.target.getAttribute("data-index")
+    console.log(index)
+    this.state.books.splice(index, 1)
+
+    this.setState({ books: this.state.books });
+
+    API.deleteBook(id)
+  }
+
   render() {
     return (
       <div>
         <Container fluid>
-        <Row>
-          <Col size="md-12">
-          <Jumbotron>
-            <h1 className="text-center">Saved book</h1>
-          </Jumbotron>
-          <Navbar />
-          {this.state.books.map(obj=>{
-            return <SearchResults 
-            cansave={false}
-            title={obj.title}
-            authors={obj.authors}
-            image={obj.image}
-            publishedDate={obj.publishedDate}
-            link={obj.link}
-            description={obj.description}
-            />
-            
-          })}
-          
-          </Col>
-        </Row>
+          <Row>
+            <Col size="md-12">
+              <Jumbotron>
+                <h1 className="text-center">Saved book</h1>
+              </Jumbotron>
+              <Navbar />
+              {this.state.books.map((obj, index) => {
+                return <SearchResults
+                  cansave={false}
+                  title={obj.title}
+                  authors={obj.authors}
+                  image={obj.image}
+                  publishedDate={obj.publishedDate}
+                  link={obj.link}
+                  description={obj.description}
+                  id={obj._id}
+                  index={index}
+                  handleDeleteBook={this.handleDeleteBook}
+                />
+              })}
+            </Col>
+          </Row>
         </Container>
       </div>
     );

@@ -5,21 +5,22 @@ import Navbar from "../components/Navbar";
 
 function NoMatch() {
   return (
-    <Container fluid>
-      <Row>
-        <Col size="md-12">
-          <Jumbotron>
-          <Navbar />
-            <h1>404 Page Not Found</h1>
-            <h1>
-              <span role="img" aria-label="Face With Rolling Eyes Emoji">
-                🙄
+    <div>
+      <Container fluid>
+        <Row>
+          <Col size="md-12">
+            <Jumbotron>
+              <h1 className="text-center">Search Book!</h1>
+            </Jumbotron>
+            <Navbar />
+            <h1>404 Page Not Found<span role="img" aria-label="Face With Rolling Eyes Emoji"> 🙄
               </span>
             </h1>
-          </Jumbotron>
-        </Col>
-      </Row>
-    </Container>
+
+          </Col>
+        </Row>
+      </Container>
+    </div>
   );
 }
 
