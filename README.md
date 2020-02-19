@@ -10,6 +10,10 @@
 
 * For the front end, with React and Google Book AIP, users can search for book names and view and save them. For the back end, the user's saved data is stored in mongodb and can be deleted from the database.
 
+![Screenshots-search](./Screenshots-search.jpg)
+
+![Screenshots-saved](./Screenshots-saved.jpg)
+
 ## Technologies used
 
 * MongoDB
